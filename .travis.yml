@@ -1,0 +1,18 @@
+matrix:
+  include:
+    - name: "OCI CLI Installation testing"
+      os: osx
+      osx_image: xcode11.3
+      language: shell
+      script:
+        - source $TRAVIS_BUILD_DIR/scripts/install/install.sh --accept-all-defaults
+    - name: "Homebrew testing and release on macOS 10.14 for ocicli"
+      os: osx
+      osx_image: xcode11.3
+      language: shell
+      script:
+        - source $TRAVIS_BUILD_DIR/scripts/brew_update.sh
+        - source $TRAVIS_BUILD_DIR/scripts/test_release_formula.sh
+        - source $TRAVIS_BUILD_DIR/scripts/test_integ_formula.sh
+        - source $TRAVIS_BUILD_DIR/scripts/upgrade_formula.sh
+        - source $TRAVIS_BUILD_DIR/scripts/push_to_github.sh
